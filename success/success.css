@@ -1,0 +1,16 @@
+.success-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 300px;
+  margin: auto;
+  margin-top: 100px;
+}
+
+.token {
+  word-break: break-all; /* Permitir a quebra de palavras longas */
+  display: block; /* Exibir o token como um bloco para quebrar linhas */
+  overflow-wrap: anywhere; /* Outra opção para quebra de palavras */
+}
