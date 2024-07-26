@@ -4,9 +4,6 @@
     "dotenv": "^16.4.5"
   },
   "scripts": {
-    "start": "node inject-env.js && live-server"
-  },
-  "devDependencies": {
-    "live-server": "^1.2.2"
+    "start": "node inject-env.js"
   }
 }
