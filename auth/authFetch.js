@@ -1,5 +1,6 @@
 async function authenticatedFetch(url, options = {}) {
   var urlCompleta = "http://localhost:8080" + url;
+  console.log(urlCompleta);
 
   // Verifica se a URL é '/login' e não faz verificação de token
   if (urlCompleta.includes('/login') || urlCompleta.includes('/users')){
