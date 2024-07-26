@@ -1,17 +1,13 @@
 async function authenticatedFetch(url, options = {}) {
   var urlCompleta = "http://localhost:8080" + url;
-  console.log(urlCompleta);
 
-  // Verifica se a URL é '/login' e não faz verificação de token
   if (urlCompleta.includes('/login') || urlCompleta.includes('/users')){
-    console.log('Chamou');
-    return fetch(urlCompleta, options); // Faz a requisição normalmente sem adicionar o token
+    return fetch(urlCompleta, options); 
   }
 
-  // Caso não seja '/login', realiza a verificação do token
   const loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
   if (!loginResponse) {
-    window.location.href = 'index.html'; // Redirecionar se não houver dados
+    window.location.href = 'index.html';
     return;
   }
 
@@ -21,11 +17,10 @@ async function authenticatedFetch(url, options = {}) {
 
   if (currentTime >= expirationTime) {
     localStorage.removeItem('loginResponse');
-    window.location.href = 'index.html'; // Redirecionar se o token estiver expirado
+    window.location.href = 'index.html';
     return;
   }
 
-  // Adicionar o token ao cabeçalho da requisição
   const headers = new Headers(options.headers || {});
   headers.append('Authorization', `Bearer ${loginResponse.accessToken}`);
 
@@ -33,7 +28,7 @@ async function authenticatedFetch(url, options = {}) {
 
   if (response.status === 401) {
     localStorage.removeItem('loginResponse');
-    window.location.href = 'index.html'; // Redirecionar se a resposta for não autorizado
+    window.location.href = 'index.html';
   }
 
   return response;

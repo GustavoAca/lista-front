@@ -29,8 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       window.location.href = '../index.html';
     } catch (error) {
-      console.error('Error:', error);
-
       if (error.message === 'NetworkError when attempting to fetch resource.') {
         errorMessage.textContent = 'Sistema indisponível';
       } else {
