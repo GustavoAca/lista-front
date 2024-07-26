@@ -31,7 +31,12 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (error) {
       console.error('Error:', error);
 
-      errorMessage.textContent = error.message;
+      if (error.message === 'NetworkError when attempting to fetch resource.') {
+        errorMessage.textContent = 'Sistema indisponível';
+      } else {
+        errorMessage.textContent = error.message;
+      }
+
       errorAlert.style.display = 'block';
 
       setTimeout(() => {
