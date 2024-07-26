@@ -1,4 +1,6 @@
-import { authenticatedFetch } from './auth/authFetch.js';
+import { authenticatedFetch } from '../auth/authFetch.js';
+import { isCamposValidos } from '../global/global.js';
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
@@ -11,6 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const username = document.getElementById('floatingInput').value;
         const password = document.getElementById('floatingPassword').value;
+        
+        if(!isCamposValidos(username, password, errorMessage, errorAlert)){
+            return;
+        }
 
         loginForm.style.display = 'none';
         spinner.style.display = 'block';
@@ -29,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const data = await response.json();
             localStorage.setItem('loginResponse', JSON.stringify(data));
-            window.location.href = './success/success.html';
+            window.location.href = '../tela-inicial/tela-inicial.html';
         } catch (error) {
             if (error.message === 'NetworkError when attempting to fetch resource.') {
                 errorMessage.textContent = 'Sistema indisponível';

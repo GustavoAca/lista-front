@@ -1,4 +1,5 @@
 import { authenticatedFetch } from '../auth/authFetch.js';
+import { isCamposValidos } from '../global/global.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const loginForm = document.getElementById('cadastroForm');
@@ -11,6 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const username = document.getElementById('floatingInput').value;
     const password = document.getElementById('floatingPassword').value;
+
+    if(!isCamposValidos(username, password, errorMessage, errorAlert)){
+        return;
+    }
 
     loginForm.style.display = 'none';
     spinner.style.display = 'block';

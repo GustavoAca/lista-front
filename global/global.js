@@ -1,17 +1,22 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const inputs = document.querySelectorAll('.formulario input');
+function isCamposValidos(username, password, errorMessage, errorAlert) {
+  if(!isValido(username, password)){
+    errorMessage.textContent = 'Username ou senha inválidos!';
+    errorAlert.style.display = 'block';
+  
+    setTimeout(() => {
+      errorAlert.style.display = 'none';
+    }, 5000);
+  
+    return;
+  }
+  return true;
+}
 
-  inputs.forEach(input => {
-    input.addEventListener('input', () => {
-      if (input.value.trim() === '') {
-        input.classList.remove('filled');
-        input.classList.add('empty');
-      } else {
-        input.classList.remove('empty');
-        input.classList.add('filled');
-      }
-    });
+function isValido(username, password) {
+  const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regexEmail.test(username) && password.length >= 4;
+}
 
-    input.dispatchEvent(new Event('input'));
-  });
-});
+
+
+export { isCamposValidos };

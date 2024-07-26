@@ -1,8 +1,7 @@
-.empty {
-  color: white;
-}
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
 .filled {
-  color: black;
+  color: black !important;
 }
 
 .gradient-custom {
@@ -17,6 +16,5 @@
   }
 
   .form-floating .form-control {
-    background-color: #212529; /* Cor de fundo mais escura que o branco */
     border-color: #ccc; /* Cor da borda */
 }
