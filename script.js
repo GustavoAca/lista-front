@@ -16,16 +16,22 @@ document.addEventListener('DOMContentLoaded', () => {
         spinner.style.display = 'block';
 
         try {
+            console.log('Chamou´');
             const response = await authenticatedFetch('/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password })
             });
 
+            console.log('Voltou ');
+
             if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.detail || 'Erro desconhecido!');
             }
+            
+            console.log('sucesso na requisicao');
+            console.log(response.json());
 
             const data = await response.json();
             localStorage.setItem('loginResponse', JSON.stringify(data));

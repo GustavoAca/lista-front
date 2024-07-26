@@ -4,6 +4,7 @@ async function authenticatedFetch(url, options = {}) {
 
   // Verifica se a URL é '/login' e não faz verificação de token
   if (urlCompleta.includes('/login') || urlCompleta.includes('/users')){
+    console.log('Chamou');
     return fetch(urlCompleta, options); // Faz a requisição normalmente sem adicionar o token
   }
 
