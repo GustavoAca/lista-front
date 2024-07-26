@@ -34,7 +34,7 @@ jobs:
         run: npm install
 
       - name: Inject environment variables
-        run: node inject.env.js
+        run: node inject-env.js
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
