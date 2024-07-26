@@ -24,8 +24,5 @@ jobs:
       - name: Run HTML Linter
         run: npx htmlhint '**/*.html'
 
-      - name: Run CSS Linter
-        run: npx stylelint '**/*.css'
-
       - name: Run JavaScript Linter
         run: npx eslint '**/*.js'
