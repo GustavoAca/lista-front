@@ -2,12 +2,10 @@ async function authenticatedFetch(url, options = {}) {
   const urlLogin = '../login/login.html';
   const urlCompleta = "http://localhost:8080" + url;
 
-  // Se a URL for de login ou de usuários, não precisa de autenticação
   if (urlCompleta.includes('/login') || urlCompleta.includes('/users')) {
     return fetch(urlCompleta, options); 
   }
 
-  // Recupera a resposta de login do armazenamento local
   const loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
   
   if (!loginResponse) {
@@ -38,7 +36,6 @@ async function authenticatedFetch(url, options = {}) {
 
     return response;
   } catch (error) {
-    console.error('Erro na requisição:', error);
   }
 }
 
