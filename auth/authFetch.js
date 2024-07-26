@@ -1,5 +1,5 @@
 async function authenticatedFetch(url, options = {}) {
-  var urlCompleta = "http://localhost:8080" + url;
+  var urlCompleta = "{{API_URL}}" + url;
   console.log(urlCompleta);
 
   // Verifica se a URL é '/login' e não faz verificação de token
