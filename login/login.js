@@ -1,7 +1,6 @@
 import { authenticatedFetch } from '../auth/authFetch.js';
 import { isCamposValidos } from '../global/global.js';
 
-
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
     const spinner = document.getElementById('loadingSpinner');
