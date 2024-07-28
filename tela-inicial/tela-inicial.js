@@ -49,6 +49,14 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  const botaoCarrinhoDeCompra = document.getElementById('carrinhoDeCompra');
+
+  botaoCarrinhoDeCompra.addEventListener('click', (event) => {
+    event.preventDefault();
+    window.location.href = '../carrinho-de-compra/carrinho-de-compra.html';
+  })
+})
 
 document.addEventListener("DOMContentLoaded", async function () {
 
