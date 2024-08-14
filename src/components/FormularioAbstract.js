@@ -1,7 +1,5 @@
 import { ComponentAbstract } from './ComponentsAbstract.js';
 import { authenticatedFetch } from '../../auth/authFetch.js';
-import { isCamposValidos } from '../../global/global.js';
-
 
 class FormularioAbstract extends ComponentAbstract {
   constructor() {
@@ -27,7 +25,7 @@ class FormularioAbstract extends ComponentAbstract {
     const password = this.form.querySelector('#floatingPassword').value;
 
     // Validação dos campos
-    if (!isCamposValidos(username, password, this.avisoComponent.shadowRoot.querySelector('#errorMessage'), this.avisoComponent)) {
+    if (!this.isCamposValidos(username, password, this.avisoComponent.shadowRoot.querySelector('#errorMessage'), this.avisoComponent)) {
       return;
     }
 
@@ -36,11 +34,7 @@ class FormularioAbstract extends ComponentAbstract {
     this.spinner.style.display = 'block';
 
     try {
-      const response = await authenticatedFetch(this.getAttribute("requisicao"), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-      });
+      const response = await this.enviarRequisicao(username, password);
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -53,23 +47,39 @@ class FormularioAbstract extends ComponentAbstract {
       }
       window.location.href = '../../tela-inicial/tela-inicial.html';
     } catch (error) {
-      const errorMessageElement = this.avisoComponent.shadowRoot.querySelector('#errorMessage');
+      this.definirMensagemExibicao(error);
+
+      this.avisoComponent.show();
+      this.ocultarMensagem();
+
+      this.form.style.display = 'block';
+    } finally {
+      this.spinner.style.display = 'none';
+    }
+  }
+
+  async enviarRequisicao(username, password){
+    return await authenticatedFetch(this.getAttribute("requisicao"), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
+  }
+
+  definirMensagemExibicao(error){
+    const errorMessageElement = this.avisoComponent.shadowRoot.querySelector('#errorMessage');
 
       if (error.message === 'NetworkError when attempting to fetch resource.') {
         errorMessageElement.textContent = 'Sistema indisponível';
       } else {
         errorMessageElement.textContent = error.message || error;
       }
+  }
 
-      this.avisoComponent.show();
-
-      setTimeout(() => {
-        this.avisoComponent.hide();
-      }, 5000);
-      this.form.style.display = 'block';
-    } finally {
-      this.spinner.style.display = 'none';
-    }
+  ocultarMensagem(){
+    setTimeout(() => {
+      this.avisoComponent.hide();
+    }, 5000);
   }
 
   build() {
@@ -148,6 +158,25 @@ class FormularioAbstract extends ComponentAbstract {
     botao.textContent = this.getAttribute("texto-botao");
     botao.setAttribute("class", "btn btn-outline-light btn-lg px-5 pb-lg-2");
     return botao;
+  }
+
+ isCamposValidos(username, password, errorMessage, errorAlert) {
+    if(!this.isValido(username, password)){
+      errorMessage.textContent = 'Username ou senha inválidos!';
+      errorAlert.style.display = 'block';
+    
+      setTimeout(() => {
+        errorAlert.style.display = 'none';
+      }, 5000);
+    
+      return;
+    }
+    return true;
+  }
+  
+  isValido(username, password) {
+    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regexEmail.test(username) && password.length >= 4;
   }
 }
 
