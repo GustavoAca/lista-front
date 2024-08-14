@@ -1,0 +1,22 @@
+#adicionarItem {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.bottom-button {
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+}
