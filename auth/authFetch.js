@@ -1,5 +1,5 @@
 async function authenticatedFetch(url, options = {}) {
-  const urlLogin = '../login/login.html';
+  const urlLogin = '/login/login.html';
   const urlCompleta = "http://localhost:8080" + url;
 
   if (urlCompleta.includes('/login') || urlCompleta.includes('/users')) {

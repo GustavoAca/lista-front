@@ -1,5 +1,5 @@
-import { ComponentAbstract } from './ComponentsAbstract.js';
-import { authenticatedFetch } from '../../auth/authFetch.js';
+import { ComponentAbstract } from '/src/components/ComponentsAbstract.js';
+import { authenticatedFetch } from '/auth/authFetch.js';
 
 class FormularioAbstract extends ComponentAbstract {
   constructor() {
@@ -45,7 +45,7 @@ class FormularioAbstract extends ComponentAbstract {
       if(data !== null){
         localStorage.setItem('loginResponse', JSON.stringify(data));
       }
-      window.location.href = '../../tela-inicial/tela-inicial.html';
+      window.location.href = '/tela-inicial/tela-inicial.html';
     } catch (error) {
       this.definirMensagemExibicao(error);
 

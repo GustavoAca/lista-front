@@ -1,10 +1,10 @@
-import { authenticatedFetch } from '../auth/authFetch.js';
+import { authenticatedFetch } from '/auth/authFetch.js';
 
 document.addEventListener('DOMContentLoaded', function () {
   const loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
 
   if (!loginResponse) {
-    window.location.href = '../login/login.html';
+    window.location.href = '/login/login.html';
     return;
   }
 
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
   logoutButton.addEventListener('click', (event) => {
     event.preventDefault();
     localStorage.removeItem('loginResponse');
-    window.location.href = '../login/login.html';
+    window.location.href = '/login/login.html';
   });
 });
 
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   botaoCarrinhoDeCompra.addEventListener('click', (event) => {
     event.preventDefault();
-    window.location.href = '../carrinho-de-compra/carrinho-de-compra.html';
+    window.location.href = '/carrinho-de-compra/carrinho-de-compra.html';
   })
 })
 
