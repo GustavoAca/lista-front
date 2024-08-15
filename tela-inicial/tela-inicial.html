@@ -6,61 +6,31 @@
     <title>Tela inicial</title>
     <link rel="stylesheet" href="./tela-inicial.css" />
     <link rel="stylesheet" href="../global/global.css" />
+    <script type="module" src="../src/components/cabecalho/Cabecalho.js" defer></script>
+    <script type="module" src="../src/components/Lista.js" defer></script>
+
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavDarkDropdown"
-          aria-controls="navbarNavDarkDropdown"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-          <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <button
-                class="btn btn-dark dropdown-toggle"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <i class="bi bi-person-fill"></i>
-              </button>
-              <ul class="dropdown-menu dropdown-menu-dark">
-                <li><a class="dropdown-item" id="logout" href="#">Sair</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <cabecalho-component></cabecalho-component>
 
-    <div class="success-container">
-      <h2>Login realizado com sucesso!</h2>
-      <p><strong>Expires In:</strong> <span id="expiresIn"></span></p>
-      <p><strong>Time Remaining:</strong> <span id="timeRemaining"></span></p>
-    </div>
-
-    <div>
-      <div>
-        <h2 class="m-3">Lista de compras</h2>
-        <div class="m-3">
+    <div class="container mt-2 d-flex  flex-column justify-content-center">
+      <h2 class="m-3">Lista de compras</h2>
+      <div class="container d-flex justify-content-between">
+        <div class="container lado-esquerdo">
+          <p>Esquerdo</p>
           <ul class="list-group" id="compra-list"></ul>
         </div>
       </div>
+    </div>
 
-      <div class="d-flex">
-        <button id="carrinhoDeCompra" class="btn btn-primary">
-          <i class="bi bi-cart-plus"></i>
-        </button>
-      </div>
+    <div class="d-flex">
+      <button id="carrinhoDeCompra" class="btn btn-primary">
+        <i class="bi bi-cart-plus"></i>
+      </button>
     </div>
     <script type="module" src="./tela-inicial.js"></script>
+    <script type="module" src="../global/global.js"></script>
+
   </body>
 </html>

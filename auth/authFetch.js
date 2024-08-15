@@ -1,13 +1,13 @@
 async function authenticatedFetch(url, options = {}) {
-  const urlLogin = '../login/login.html';
+  const urlLogin = '/login/login.html';
   const urlCompleta = "http://localhost:8080" + url;
 
   if (urlCompleta.includes('/login') || urlCompleta.includes('/users')) {
-    return fetch(urlCompleta, options); 
+    return fetch(urlCompleta, options);
   }
 
   const loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
-  
+
   if (!loginResponse) {
     window.location.href = urlLogin;
     return;
@@ -18,6 +18,7 @@ async function authenticatedFetch(url, options = {}) {
   const expirationTime = currentTime + expiresIn;
 
   if (currentTime >= expirationTime) {
+
     localStorage.removeItem('loginResponse');
     window.location.href = urlLogin;
     return;

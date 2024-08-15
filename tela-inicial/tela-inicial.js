@@ -1,10 +1,10 @@
-import { authenticatedFetch } from '../auth/authFetch.js';
+import { authenticatedFetch } from '/auth/authFetch.js';
 
 document.addEventListener('DOMContentLoaded', function () {
   const loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
 
   if (!loginResponse) {
-    window.location.href = '../login/login.html';
+    window.location.href = '/login/login.html';
     return;
   }
 
@@ -38,23 +38,12 @@ document.addEventListener('DOMContentLoaded', function () {
   updateCountdown();
 });
 
-
-document.addEventListener('DOMContentLoaded', () => {
-  const logoutButton = document.getElementById('logout');
-
-  logoutButton.addEventListener('click', (event) => {
-    event.preventDefault();
-    localStorage.removeItem('loginResponse');
-    window.location.href = '../login/login.html';
-  });
-});
-
 document.addEventListener("DOMContentLoaded", () => {
   const botaoCarrinhoDeCompra = document.getElementById('carrinhoDeCompra');
 
   botaoCarrinhoDeCompra.addEventListener('click', (event) => {
     event.preventDefault();
-    window.location.href = '../carrinho-de-compra/carrinho-de-compra.html';
+    window.location.href = '/carrinho-de-compra/carrinho-de-compra.html';
   })
 })
 
@@ -73,7 +62,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     const data = await response.json();
     const itemList = document.getElementById('compra-list');
-    console.table(data);
     
     // Acessa a lista de compras dentro do campo "content"
     const compras = data.content;
@@ -150,26 +138,21 @@ document.addEventListener("DOMContentLoaded", function () {
         compras.forEach(compra => {
           const listItem = document.createElement('li');
           listItem.className = 'list-group-item';
-          const dataFormatada = formatDate(compra.createdDate);
-          // Cria a estrutura do item da compra
-          listItem.innerHTML = `
-            <div class="d-flex w-100 justify-content-between align-items-center">
-              <div class="d-flex flex-column">
-                <h5 class="mb-1">Realizada em: ${dataFormatada}</h5>
-                <span class="badge badge-primary badge-pill">${compra.items.length} items</span>
-              </div>
-              <span class="badge text-bg-primary rounded-pill">Valor Total: R$ ${compra.valorTotal !== null ? compra.valorTotal.toFixed(2) : 'Não disponível'}</span>
-            </div>`;
+          const listaComponent = document.createElement('lista-component');
+
+          listaComponent.setAttribute('dataCompra', compra.createdDate);
+          listaComponent.setAttribute('valorTotal', compra.valorTotal);
+
+          listItem.appendChild(listaComponent);
+        
 
           itemList.appendChild(listItem);
         });
 
-        // Adiciona o indicador de carregamento apenas se o número de itens for igual ao tamanho da página
         if (compras.length === pageSize) {
           itemList.appendChild(loadingIndicator);
         }
 
-        // Atualiza a página
         currentPage++;
       }
 

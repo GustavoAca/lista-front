@@ -9,7 +9,6 @@ class FormularioAbstract extends ComponentAbstract {
 
     shadow.appendChild(this.build());
 
-
     this.form = shadow.querySelector('form');
     this.spinner = document.getElementById('loadingSpinner');
     this.avisoComponent = document.querySelector('aviso-component'); // Certifique-se que o AvisoComponent está fora do shadow DOM
@@ -34,18 +33,22 @@ class FormularioAbstract extends ComponentAbstract {
     this.spinner.style.display = 'block';
 
     try {
-      const response = await this.enviarRequisicao(username, password);
+      const response = await authenticatedFetch(this.getAttribute("requisicao"), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+      console.log('Requisicao feita')
+      console.log(response);
 
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.detail || 'Erro desconhecido!');
       }
 
-      const data = response.json();
-      if(data !== null){
-        localStorage.setItem('loginResponse', JSON.stringify(data));
-      }
-      window.location.href = '../../tela-inicial/tela-inicial.html';
+      const data = await response.json();
+      localStorage.setItem('loginResponse', JSON.stringify(data));
+      window.location.href = '/tela-inicial/tela-inicial.html';
     } catch (error) {
       this.definirMensagemExibicao(error);
 
@@ -58,25 +61,17 @@ class FormularioAbstract extends ComponentAbstract {
     }
   }
 
-  async enviarRequisicao(username, password){
-    return await authenticatedFetch(this.getAttribute("requisicao"), {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password })
-    });
-  }
-
-  definirMensagemExibicao(error){
+  definirMensagemExibicao(error) {
     const errorMessageElement = this.avisoComponent.shadowRoot.querySelector('#errorMessage');
 
-      if (error.message === 'NetworkError when attempting to fetch resource.') {
-        errorMessageElement.textContent = 'Sistema indisponível';
-      } else {
-        errorMessageElement.textContent = error.message || error;
-      }
+    if (error.message === 'NetworkError when attempting to fetch resource.') {
+      errorMessageElement.textContent = 'Sistema indisponível';
+    } else {
+      errorMessageElement.textContent = error.message || error;
+    }
   }
 
-  ocultarMensagem(){
+  ocultarMensagem() {
     setTimeout(() => {
       this.avisoComponent.hide();
     }, 5000);
@@ -89,10 +84,10 @@ class FormularioAbstract extends ComponentAbstract {
     componentRoot.appendChild(this.buildFormEmail());
     componentRoot.appendChild(this.buildFormPassword());
     const deveMostrarEsqueceuASenha = this.getAttribute("deveMostrarEsqueceuASenha");
-    if(deveMostrarEsqueceuASenha){
+    if (deveMostrarEsqueceuASenha) {
       componentRoot.appendChild(this.buildEsqueceuASenha());
     }
-   
+
     componentRoot.appendChild(this.buildBotao());
 
     return componentRoot;
@@ -139,10 +134,10 @@ class FormularioAbstract extends ComponentAbstract {
     return password;
   }
 
-  buildEsqueceuASenha(){
+  buildEsqueceuASenha() {
     const esqueceuSenhaP = document.createElement("p");
     esqueceuSenhaP.setAttribute("class", "small mb-5 pb-lg-2");
-    
+
     const esqueceuASenhaLink = document.createElement("a");
     esqueceuASenhaLink.setAttribute("class", "text-white-50");
     esqueceuASenhaLink.href = "#";
@@ -152,7 +147,7 @@ class FormularioAbstract extends ComponentAbstract {
     return esqueceuSenhaP;
   }
 
-  buildBotao(){
+  buildBotao() {
     const botao = document.createElement("button");
     botao.type = "submit";
     botao.textContent = this.getAttribute("texto-botao");
@@ -160,20 +155,20 @@ class FormularioAbstract extends ComponentAbstract {
     return botao;
   }
 
- isCamposValidos(username, password, errorMessage, errorAlert) {
-    if(!this.isValido(username, password)){
+  isCamposValidos(username, password, errorMessage, errorAlert) {
+    if (!this.isValido(username, password)) {
       errorMessage.textContent = 'Username ou senha inválidos!';
       errorAlert.style.display = 'block';
-    
+
       setTimeout(() => {
         errorAlert.style.display = 'none';
       }, 5000);
-    
+
       return;
     }
     return true;
   }
-  
+
   isValido(username, password) {
     const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regexEmail.test(username) && password.length >= 4;
