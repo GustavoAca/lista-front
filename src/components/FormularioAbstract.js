@@ -46,15 +46,9 @@ class FormularioAbstract extends ComponentAbstract {
         throw new Error(errorData.detail || 'Erro desconhecido!');
       }
 
-<<<<<<< HEAD
-      const data = await response.json();
-      localStorage.setItem('loginResponse', JSON.stringify(data));
-=======
-      const data = response.json();
       if(data !== null){
         localStorage.setItem('loginResponse', JSON.stringify(data));
       }
->>>>>>> 90efc973907ec72868c5b019662987374e49d449
       window.location.href = '/tela-inicial/tela-inicial.html';
     } catch (error) {
       this.definirMensagemExibicao(error);

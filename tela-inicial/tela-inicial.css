@@ -15,7 +15,6 @@
   overflow-wrap: anywhere; /* Outra opção para quebra de palavras */
 }
 
-
 #carrinhoDeCompra {
   position: fixed;
   bottom: 20px;

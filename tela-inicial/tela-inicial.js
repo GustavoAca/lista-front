@@ -38,20 +38,6 @@ document.addEventListener('DOMContentLoaded', function () {
   updateCountdown();
 });
 
-<<<<<<< HEAD
-=======
-
-document.addEventListener('DOMContentLoaded', () => {
-  const logoutButton = document.getElementById('logout');
-
-  logoutButton.addEventListener('click', (event) => {
-    event.preventDefault();
-    localStorage.removeItem('loginResponse');
-    window.location.href = '/login/login.html';
-  });
-});
-
->>>>>>> 90efc973907ec72868c5b019662987374e49d449
 document.addEventListener("DOMContentLoaded", () => {
   const botaoCarrinhoDeCompra = document.getElementById('carrinhoDeCompra');
 
