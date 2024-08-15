@@ -1,49 +1,11 @@
 import { authenticatedFetch } from '/auth/authFetch.js';
 
-document.addEventListener('DOMContentLoaded', function () {
-  const loginResponse = JSON.parse(localStorage.getItem('loginResponse'));
-
-  if (!loginResponse) {
-    window.location.href = '/login/login.html';
-    return;
-  }
-
-  // Calcula o tempo de expiração
-  const expiresIn = loginResponse.expiresIn * 1000; // Converte segundos para milissegundos
-  const expirationTime = Date.now() + expiresIn; // Tempo de expiração no futuro
-
-  function updateCountdown() {
-    const currentTime = Date.now();
-    const timeRemaining = expirationTime - currentTime;
-
-    if (timeRemaining <= 0) {
-      document.getElementById('timeRemaining').textContent = 'Expirado';
-      clearInterval(interval); // Para a contagem regressiva
-      return;
-    }
-
-    const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-
-    document.getElementById('timeRemaining').textContent =
-      `${days}d ${hours}h ${minutes}m ${seconds}s`;
-  }
-
-  // Atualiza a contagem regressiva a cada segundo
-  const interval = setInterval(updateCountdown, 1000);
-
-  // Atualiza a contagem regressiva imediatamente ao carregar
-  updateCountdown();
-});
-
 document.addEventListener("DOMContentLoaded", () => {
   const botaoCarrinhoDeCompra = document.getElementById('carrinhoDeCompra');
 
   botaoCarrinhoDeCompra.addEventListener('click', (event) => {
     event.preventDefault();
-    window.location.href = '/carrinho-de-compra/carrinho-de-compra.html';
+    window.location.href = '../carrinho-de-compra/carrinho-de-compra.html';
   })
 })
 
@@ -62,13 +24,13 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     const data = await response.json();
     const itemList = document.getElementById('compra-list');
-    
+
     // Acessa a lista de compras dentro do campo "content"
     const compras = data.content;
-    
+
     // Limpa a lista atual
     itemList.innerHTML = '';
-    
+
     compras.forEach(compra => {
       const listItem = document.createElement('li');
       listItem.className = 'list-group-item';
@@ -83,10 +45,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     <span class="badge text-bg-primary rounded-pill">Valor Total: R$ ${compra.valorTotal !== null ? compra.valorTotal.toFixed(2) : 'Não disponível'}</span>
     </div>
       `;
-    
+
       itemList.appendChild(listItem);
     });
-    
+
   } catch (error) {
     console.error('Erro ao carregar os dados:', error);
   }
@@ -115,13 +77,14 @@ document.addEventListener("DOMContentLoaded", function () {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
       });
-
+      
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.detail || 'Erro desconhecido!');
       }
 
       const data = await response.json();
+      console.log(data.content)
       const compras = data.content;
 
       // Remove o indicador de carregamento se já estiver presente
@@ -144,7 +107,6 @@ document.addEventListener("DOMContentLoaded", function () {
           listaComponent.setAttribute('valorTotal', compra.valorTotal);
 
           listItem.appendChild(listaComponent);
-        
 
           itemList.appendChild(listItem);
         });
@@ -176,12 +138,11 @@ document.addEventListener("DOMContentLoaded", function () {
   fetchData(currentPage);
 });
 
-
 function formatDate(dateString) {
   const date = new Date(dateString);
   const day = String(date.getDate()).padStart(2, '0');
   const month = String(date.getMonth() + 1).padStart(2, '0'); // Meses são 0-baseados
   const year = date.getFullYear();
-  
+
   return `${day}/${month}/${year}`;
 }

@@ -1,4 +1,4 @@
-import { ComponentAbstract } from "/src/components/ComponentsAbstract.js";
+import { ComponentAbstract } from "../ComponentsAbstract.js";
 
 class AvisoComponent extends ComponentAbstract {
   constructor() {

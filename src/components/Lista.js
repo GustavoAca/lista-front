@@ -7,13 +7,6 @@ class Lista extends ComponentAbstract {
     shadow.appendChild(this.build());
   }
 
-  // build() {
-  //   const componentRoot = document.createElement("li");
-  //   componentRoot.setAttribute("class", "list-group-item");
-  //   componentRoot.appendChild(this.buildDiv());
-  //   return componentRoot;
-  // }
-
   build(){
     const div = document.createElement("div");
     div.setAttribute("class", "d-flex w-100 justify-content-between align-items-center");
@@ -52,7 +45,6 @@ class Lista extends ComponentAbstract {
     
     return `${day}/${month}/${year}`;
   }
-
 }
 
 customElements.define('lista-component', Lista);

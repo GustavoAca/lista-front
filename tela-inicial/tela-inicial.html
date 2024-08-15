@@ -4,36 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tela inicial</title>
-<<<<<<< HEAD
     <link rel="stylesheet" href="./tela-inicial.css" />
     <link rel="stylesheet" href="../global/global.css" />
     <script type="module" src="../src/components/cabecalho/Cabecalho.js" defer></script>
     <script type="module" src="../src/components/Lista.js" defer></script>
-
-=======
-    <link rel="stylesheet" href="/tela-inicial/tela-inicial.css" />
-    <link rel="stylesheet" href="/global/global.css" />
->>>>>>> 90efc973907ec72868c5b019662987374e49d449
   </head>
 
   <body>
     <cabecalho-component></cabecalho-component>
 
-    <div class="container mt-2 d-flex  flex-column justify-content-center">
-      <h2 class="m-3">Lista de compras</h2>
-      <div class="container d-flex justify-content-between">
-        <div class="container lado-esquerdo">
-          <p>Esquerdo</p>
-          <ul class="list-group" id="compra-list"></ul>
+    <div class="container d-flex align-content-center justify-content-center">
+      <div class="container mt-2 d-flex  flex-column justify-content-center">
+        <h2 class="m-3">Lista de compras</h2>
+        <div class="container d-flex justify-content-between">
+          <div class="container lado-esquerdo">
+            <ul class="list-group" id="compra-list"></ul>
+          </div>
         </div>
+      </div>
+  
+      <div class="d-flex justify-content-center align-content-center">
+        <button id="carrinhoDeCompra" class="btn btn-primary">
+          <i class="bi bi-cart-plus"></i>
+        </button>
       </div>
     </div>
 
-    <div class="d-flex">
-      <button id="carrinhoDeCompra" class="btn btn-primary">
-        <i class="bi bi-cart-plus"></i>
-      </button>
-    </div>
+    
     <script type="module" src="./tela-inicial.js"></script>
     <script type="module" src="../global/global.js"></script>
 

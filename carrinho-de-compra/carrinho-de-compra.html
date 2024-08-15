@@ -1,55 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/global/global.css" />
-  <link rel="stylesheet" href="./carrinho-de-compra.css" />
-  <script type="module" src="../src/components/cabecalho/Cabecalho.js" defer></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../global/global.css" />
+    <link rel="stylesheet" href="./carrinho-de-compra.css" />
+    <script
+      type="module"
+      src="../src/components/cabecalho/Cabecalho.js"
+      defer
+    ></script>
+    <script type="module" src="./carrinho-de-compra.js"></script>
+    <script type="module" src="../global/global.js"></script>
+    <script type="module" src="../tela-inicial/tela-inicial.js"></script>
 
-  <title>Carrinho de compra</title>
-</head>
-<body>
-  <cabecalho-component></cabecalho-component>
+    <title>Carrinho de compra</title>
+  </head>
+  <body>
+    <cabecalho-component></cabecalho-component>
 
-<main>
-    <h1 class="text-center">Carrinho de compras</h1>
+    <main>
+      <h1 class="text-center">Carrinho de compras</h1>
 
-    <div class="container mt-2 d-flex  flex-column justify-content-center">
-      <div class="container d-flex justify-content-between">
-        <div class="container lado-esquerdo">
-          <p>Esquerdo</p>
-        </div>
-        <div class="container lado-direito bg-danger ml-auto">
-          <p>Direito</p>
+      <div class="container mt-2 d-flex flex-column justify-content-center">
+        <div class="container d-flex justify-content-between">
+          <div class="container lado-esquerdo">
+            <p>Esquerdo</p>
+          </div>
+          <div class="container lado-direito bg-danger ml-auto">
+            <p>Direito</p>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="bottom-button">
-        <button type="button" id="adicionarItem" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Confirmar
+      <div class="bottom-button">
+        <button
+          type="button"
+          id="adicionarItem"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
+          Confirmar
         </button>
-    </div>
-</main>
+      </div>
+    </main>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmar</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary"><i class="bi bi-check2"></i></button>
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmar</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">
+              <i class="bi bi-check2"></i>
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  
-
-<script type="module" src="./carrinho-de-compra.js"></script>
-<script type="module" src="/global/global.js"></script>
-<script type="module" src="/tela-inicial/tela-inicial.js"></script>
-
-</body>
+  </body>
 </html>

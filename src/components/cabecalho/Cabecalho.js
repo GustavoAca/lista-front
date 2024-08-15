@@ -69,7 +69,7 @@ class Cabecalho extends ComponentAbstract{
     event.preventDefault();
 
     localStorage.removeItem('loginResponse');
-    window.location.href = '/login/login.html';
+    window.location.href = '../../../login/login.html';
 
   }
 }
